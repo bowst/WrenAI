@@ -1,7 +1,7 @@
 import { ComponentRef, useMemo, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { Button, Typography } from 'antd';
-import { Logo } from '@/components/Logo';
+import LogoBar from '@/components/LogoBar';
 import { Path } from '@/utils/enum';
 import SiderLayout from '@/components/layouts/SiderLayout';
 import Prompt from '@/components/pages/home/prompt';
@@ -26,7 +26,7 @@ const Wrapper = ({ children }) => {
       className="d-flex align-center justify-center flex-column"
       style={{ height: '100%' }}
     >
-      <Logo size={48} color="var(--gray-8)" />
+      <LogoBar />
       <div className="text-md text-medium gray-8 mt-3">
         Know more about your data
       </div>
