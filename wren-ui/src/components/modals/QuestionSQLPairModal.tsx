@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { Alert, Button, Form, Input, Modal, Typography } from 'antd';
-import LogoBar from '@/components/LogoBar';
+import Logo from '@/components/Logo';
 import InfoCircleOutlined from '@ant-design/icons/InfoCircleOutlined';
 import SelectOutlined from '@ant-design/icons/SelectOutlined';
 import { ERROR_TEXTS } from '@/utils/error';
@@ -40,7 +40,7 @@ const Toolbar = (props: { dataSource: string; onClick: () => void }) => {
   return (
     <div className="d-flex justify-space-between align-center px-1">
       <span className="d-flex align-center gx-2">
-        <LogoBar />
+        <Logo />
         Wren SQL
       </span>
       <Button className="px-0" type="link" size="small" onClick={onClick}>

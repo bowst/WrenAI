@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Row, Col } from 'antd';
-import LogoBar from '@/components/LogoBar';
+import Logo from '@/components/Logo';
 import { makeIterable } from '@/utils/iteration';
 
 const StepTemplate = (props: { title: string; image: string }) => {
@@ -44,7 +44,7 @@ const EmptyDashboard = (props: {
         className="d-flex align-center justify-center flex-column -mt-8"
         style={{ height: '100%' }}
       >
-        <LogoBar />
+        <Logo />
         <div className="text-lg text-medium text-center gray-8 mt-3">
           No charts have been added yet
         </div>

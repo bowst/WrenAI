@@ -6,7 +6,7 @@ import ColumnHeightOutlined from '@ant-design/icons/ColumnHeightOutlined';
 import MinusOutlined from '@ant-design/icons/MinusOutlined';
 import EllipsisWrapper from '@/components/EllipsisWrapper';
 import LoadingOutlined from '@ant-design/icons/LoadingOutlined';
-import LogoBar from '@/components/LogoBar';
+import Logo from '@/components/Logo';
 import { makeIterable } from '@/utils/iteration';
 import { GroupedQuestion } from '@/hooks/useRecommendedQuestionsInstruction';
 
@@ -115,7 +115,7 @@ export default function RecommendedQuestionsPrompt(props: Props) {
   return (
     <div className="bg-gray-2 px-10 py-6">
       <div className="d-flex align-center mb-3">
-        <LogoBar />
+        <Logo />
         <div className="text-md text-medium gray-8 mx-3">
           Know more about your data.
         </div>

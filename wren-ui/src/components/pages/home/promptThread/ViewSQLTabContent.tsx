@@ -19,7 +19,7 @@ import { BinocularsIcon } from '@/utils/icons';
 import { nextTick } from '@/utils/time';
 import useNativeSQL from '@/hooks/useNativeSQL';
 import { DATA_SOURCE_OPTIONS } from '@/components/pages/setup/utils';
-import LogoBar from '@/components/LogoBar';
+import Logo from '@/components/Logo';
 import { Props as AnswerResultProps } from '@/components/pages/home/promptThread/AnswerResult';
 import usePromptThreadStore from '@/components/pages/home/promptThread/store';
 import PreviewData from '@/components/dataPreview/PreviewData';
@@ -145,7 +145,7 @@ export default function ViewSQLTabContent(props: AnswerResultProps) {
               </>
             ) : (
               <span className="d-flex align-center gx-2">
-                <LogoBar />
+                <Logo />
                 <Text className="gray-8 text-medium text-sm">Wren SQL</Text>
               </span>
             )}
