@@ -41,7 +41,7 @@ const adjustmentType = {
 
 const knowledgeTooltip = (
   <>
-    Store this answer as a Question-SQL pair to help Stylematrics AI improve SQL
+    Store this answer as a Question-SQL pair to help StyleMetrics AI improve SQL
     generation.
     <br />
     <Typography.Link

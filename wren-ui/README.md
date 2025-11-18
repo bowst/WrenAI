@@ -69,7 +69,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 
 ## Development wren-ui module on local
-There are many modules in Stylematrics AI, to develop wren-ui, you can start other modules(services) via docker-compose.
+There are many modules in StyleMetrics AI, to develop wren-ui, you can start other modules(services) via docker-compose.
 In the [Start wren-ui from source code](#Start-wren-ui-from-source-code) section, you've know how to start wren-ui from the source code to develop.
 To start other modules via docker-compose, you can follow the steps below.
 
@@ -157,8 +157,8 @@ eg: refer to the [ai-service README](https://github.com/Canner/WrenAI/blob/main/
 
 
 ## FAQ
-### Can I have multiple project at the same time in Stylematrics AI?
-We currently do not support multiple projects in Stylematrics AI. You can only have one project at a time.
+### Can I have multiple project at the same time in StyleMetrics AI?
+We currently do not support multiple projects in StyleMetrics AI. You can only have one project at a time.
 But there is a workaround for this. Since Wren Engine is stateless and we store your semantic model in the database(Sqlite or Postgres), 
 you can switch between projects by switching the database and make sure you deploying after server started.
 
@@ -185,7 +185,7 @@ export SQLITE_FILE=./first_project.sqlite
 yarn dev  # no need to do migration again
 
 # in the modeling page, click the deploy button to deploy the project to the wren-ai-service.
-# your Stylematrics AI is ready to answer your question.
+# your StyleMetrics AI is ready to answer your question.
 ```
 
 ## Learn More

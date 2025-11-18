@@ -4,7 +4,7 @@ export default function LogoBar() {
   return (
     <Image
       src="/images/logo-white-with-text.svg"
-      alt="Stylematrics AI"
+      alt="StyleMetrics AI"
       width={125}
       height={30}
     />

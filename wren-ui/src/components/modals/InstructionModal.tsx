@@ -76,7 +76,7 @@ export default function InstructionModal(props: Props) {
         >
           <Input.TextArea
             autoFocus
-            placeholder="Enter a rule that Stylematrics AI should follow when generating SQL queries."
+            placeholder="Enter a rule that StyleMetrics AI should follow when generating SQL queries."
             maxLength={1000}
             rows={3}
             showCount
@@ -116,7 +116,7 @@ export default function InstructionModal(props: Props) {
           <Form.Item
             label="Matching questions"
             required
-            extra="Stylematrics AI will match user queries based on similarity and apply this instruction when relevant."
+            extra="StyleMetrics AI will match user queries based on similarity and apply this instruction when relevant."
           >
             <Form.List name="questions" initialValue={['']}>
               {(fields, { add, remove }) => (

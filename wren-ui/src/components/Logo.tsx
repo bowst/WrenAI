@@ -4,7 +4,7 @@ export default function Logo() {
   return (
     <Image
       src="/images/logo.svg"
-      alt="Stylematrics AI"
+      alt="StyleMetrics AI"
       width={125}
       height={30}
     />

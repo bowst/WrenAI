@@ -182,8 +182,8 @@ export default function ManageInstructions() {
         description={
           <>
             On this page, you can manage saved instructions that guide
-            Stylematrics AI in generating SQL queries. These instructions help
-            Stylematrics AI understand your data model and business rules,
+            StyleMetrics AI in generating SQL queries. These instructions help
+            StyleMetrics AI understand your data model and business rules,
             improving query accuracy and reducing the need for manual
             refinements.{' '}
             <Link

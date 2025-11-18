@@ -397,10 +397,10 @@ const playKnowledgeGuide = (
         ),
         description: renderToString(
           <>
-            Create and manage <b>Question-SQL pairs</b> to refine Stylematrics
+            Create and manage <b>Question-SQL pairs</b> to refine StyleMetrics
             AI's SQL generation. You can manually add pairs here or go to Home,
             ask a question, and save the correct answer to Knowledge. The more
-            you save, the smarter Stylematrics AI becomes!
+            you save, the smarter StyleMetrics AI becomes!
           </>,
         ),
         onPopoverRender: (popoverDom: DriverPopoverDOM) => {
@@ -427,7 +427,7 @@ const playKnowledgeGuide = (
           <>
             In addition to Question-SQL pairs, you can create instructions to
             define <b>business rules</b> and <b>query logic</b>. These rules
-            guide Stylematrics AI in applying consistent filters, constraints,
+            guide StyleMetrics AI in applying consistent filters, constraints,
             and best practices to SQL queries.
           </>,
         ),

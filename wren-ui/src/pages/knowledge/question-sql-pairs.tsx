@@ -145,7 +145,7 @@ export default function ManageQuestionSQLPairs() {
         description={
           <>
             On this page, you can manage your saved question-SQL pairs. These
-            pairs help Stylematrics AI learn how your organization writes SQL,
+            pairs help StyleMetrics AI learn how your organization writes SQL,
             allowing it to generate queries that better align with your
             expectations.{' '}
             <Link
