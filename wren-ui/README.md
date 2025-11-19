@@ -73,84 +73,75 @@ There are many modules in StyleMetrics AI, to develop wren-ui, you can start oth
 In the [Start wren-ui from source code](#Start-wren-ui-from-source-code) section, you've know how to start wren-ui from the source code to develop.
 To start other modules via docker-compose, you can follow the steps below.
 
-Step 1. Prepare you .env file
-In the WrenAI/docker folder, you can find the .env.example file. You can copy this file to .env.local file.
+Step 1. Prepare your docker-compose.yaml and .env files
+In the WrenAI/docker folder, you need to copy the example files to create your working files.
 
 ```bash
 # assume current directory is wren-ui
 cd ../docker
-cp .env.example .env.local
+
+# Copy example.docker-compose.yaml to docker-compose.yaml
+# Note: docker-compose.yaml is in .gitignore, so you need to create it from the example
+cp example.docker-compose.yaml docker-compose.yaml
+
+# Copy example.env to .env (or create your own .env file)
+cp example.env .env
 ```
-Step 2. Modify your .env.local file
-You need to fill the `OPENAI_API_KEY` with your OPENAI api key before starting.
 
-You can also change the `WREN_ENGINE_VERSION`, `WREN_AI_SERVICE_VERSION`, `IBIS_SERVER_VERSION` to the version you want to use.
+Step 2. Modify your .env file
+You need to fill the required environment variables in your `.env` file before starting:
 
+- `OPENAI_API_KEY` - Your OpenAI API key (required)
+- `GEMINI_API_KEY` - Your Gemini API key (optional, if using Gemini)
+- `USER_UUID` - A UUID v4 for user identification
+- `POSTHOG_API_KEY` - PostHog API key (optional, for telemetry)
+- `POSTHOG_HOST` - PostHog host URL (optional, for telemetry)
 
-Step 3. Start the services via docker-compose
+You can also change the version variables (`WREN_ENGINE_VERSION`, `WREN_AI_SERVICE_VERSION`, `IBIS_SERVER_VERSION`, etc.) to the versions you want to use.
+
+Step 3. Prepare config.yaml
+Make sure you have a `config.yaml` file in the `docker/` directory. You can copy from `example.config.yaml`:
+
 ```bash
 # current directory is WrenAI/docker
-docker-compose -f docker-compose-dev.yaml --env-file .env.example up
-
-# you can add a -d flag to run the services in the background
-docker-compose -f docker-compose-dev.yaml --env-file .env.example up -d
-# then stop the services via
-docker-compose -f docker-compose-dev.yaml --env-file .env.example down
+cp example.config.yaml config.yaml
 ```
 
-Step 4. Start wren-ui from source code
-refer to [Start wren-ui from source code](#Start-wren-ui-from-source-code) section to start wren-ui from source code.
+Then edit `config.yaml` to configure your LLM provider and other settings.
 
-Step 5. (Optional) Develop other modules along with wren-ui
+Step 4. Start the services via docker-compose
+```bash
+# current directory is WrenAI/docker
+# Make sure docker-compose.yaml exists (copied from example.docker-compose.yaml)
+docker compose up --build
+
+# you can add a -d flag to run the services in the background
+docker compose up --build -d
+# then stop the services via
+docker compose down
+```
+
+Step 5. Start wren-ui from source code
+Refer to [Start wren-ui from source code](#Start-wren-ui-from-source-code) section to start wren-ui from source code.
+
+Step 6. (Optional) Develop other modules along with wren-ui
 
 As mentioned above, you can use docker-compose to start other modules. The same applies when developing other modules.
 From the perspective of wren-ui, if you want to develop other modules at the same time, you can stop the container then spin up the module from the source code.
 
 eg: If you want to develop ai-service module, you can stop the ai-service container then start the ai-service from the source code.
-```yaml
-# docker/docker-compose-dev.yaml
-wren-engine:
-    image: ghcr.io/canner/wren-engine:${WREN_ENGINE_VERSION}
-    pull_policy: always
-    platform: ${PLATFORM}
-    expose:
-      - ${WREN_ENGINE_SQL_PORT}
-    ports:
-      - ${WREN_ENGINE_PORT}:${WREN_ENGINE_PORT}
-    volumes:
-      - data:/usr/src/app/etc
-    networks:
-      - wren
-    depends_on:
-      - bootstrap
-    ...
-# comment out the ai-service service
-wren-ai-service:
-    image: ghcr.io/canner/wren-ai-service:${WREN_AI_SERVICE_VERSION}
-    pull_policy: always
-    platform: ${PLATFORM}
-    ports:
-      - ${AI_SERVICE_FORWARD_PORT}:${WREN_AI_SERVICE_PORT}
-    environment:
-      WREN_UI_ENDPOINT: http://host.docker.internal:${WREN_UI_PORT}
-      # sometimes the console won't show print messages,
-      # using PYTHONUNBUFFERED: 1 can fix this
-      PYTHONUNBUFFERED: 1
-      CONFIG_PATH: /app/data/config.yaml
-    env_file:
-      - ${PROJECT_DIR}/.env
-    volumes:
-      - ${PROJECT_DIR}/config.yaml:/app/data/config.yaml
-    networks:
-      - wren
-    depends_on:
-      - qdrant
 
-ibis-server:
-    image: ghcr.io/canner/wren-engine-ibis:${IBIS_SERVER_VERSION}
-    ...
+To do this, edit your `docker/docker-compose.yaml` file and comment out the service you want to develop locally:
+
+```yaml
+# docker/docker-compose.yaml
+# Comment out the wren-ai-service service to develop it locally
+# wren-ai-service:
+#   image: ghcr.io/canner/wren-ai-service:${WREN_AI_SERVICE_VERSION}
+#   ...
 ```
-Then refer to the README.md or CONTRIBUTION.md file the module for starting the module from the source code. 
+
+Then refer to the README.md or CONTRIBUTING.md file of the module for starting the module from the source code. 
 
 eg: refer to the [ai-service README](https://github.com/Canner/WrenAI/blob/main/wren-ai-service/README.md#start-the-service-for-development) to start the ai-service from the source code.
 

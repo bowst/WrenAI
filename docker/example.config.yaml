@@ -2,57 +2,32 @@ type: llm
 provider: litellm_llm
 timeout: 120
 models:
+  # Main default LLM used across all Wren pipelines
   - alias: default
-    model: gpt-4.1-nano-2025-04-14
-    context_window_size: 1000000
-    kwargs:
-      max_tokens: 4096
-      n: 1
-      seed: 0
-      temperature: 0
-  - model: gpt-4.1-mini-2025-04-14
-    context_window_size: 1000000
-    kwargs:
-      max_tokens: 4096
-      n: 1
-      seed: 0
-      temperature: 0
-  - model: gpt-4.1-2025-04-14
-    context_window_size: 1000000
-    kwargs:
-      max_tokens: 4096
-      n: 1
-      seed: 0
-      temperature: 0
-  - model: gpt-5-nano-2025-08-07
-    context_window_size: 380000
+    model: gemini/gemini-2.5-flash
+    context_window_size: 1048576
     kwargs:
       max_completion_tokens: 4096
       n: 1
-      seed: 0
+      temperature: 0.0
       reasoning_effort: minimal
-  - model: gpt-5-mini-2025-08-07
-    context_window_size: 380000
+
+  # Optional heavier reasoning model
+  - alias: pro
+    model: gemini/gemini-2.5-pro
+    context_window_size: 1048576
     kwargs:
       max_completion_tokens: 4096
       n: 1
-      seed: 0
-      reasoning_effort: minimal
-  - model: gpt-5-2025-08-07
-    context_window_size: 380000
-    kwargs:
-      max_completion_tokens: 4096
-      n: 1
-      seed: 0
-      reasoning_effort: minimal
+      temperature: 0.0
+      reasoning_effort: low
 ---
 type: embedder
 provider: litellm_embedder
 models:
-  - model: text-embedding-3-large
+  - model: gemini/text-embedding-004
     alias: default
     timeout: 120
-
 ---
 type: engine
 provider: wren_ui
@@ -67,7 +42,7 @@ endpoint: http://ibis-server:8000
 type: document_store
 provider: qdrant
 location: http://qdrant:6333
-embedding_model_dim: 3072
+embedding_model_dim: 768
 timeout: 120
 recreate_index: true
 
@@ -163,7 +138,6 @@ pipes:
     llm: litellm_llm.default
   - name: sql_diagnosis
     llm: litellm_llm.default
-
 ---
 settings:
   doc_endpoint: https://docs.getwren.ai
@@ -188,3 +162,11 @@ settings:
   sql_pairs_retrieval_max_size: 10
   instructions_similarity_threshold: 0.7
   instructions_top_k: 10
+  cors:
+    allow_origins:
+      - "*"
+    allow_methods:
+      - "*"
+    allow_headers:
+      - "*"
+    allow_credentials: true

@@ -24,10 +24,11 @@ Path structure as following:
 
 ## How to start with OpenAI
 
-1. copy `.env.example` to `.env` and modify the OpenAI API key.
-2. copy `config.example.yaml` to `config.yaml` for AI service configuration.
-3. start all services: `docker-compose --env-file .env up -d`.
-4. stop all services: `docker-compose --env-file .env down`.
+1. Copy `example.docker-compose.yaml` to `docker-compose.yaml` (note: `docker-compose.yaml` is gitignored, so you need to create it from the example).
+2. Copy `example.env` to `.env` and modify the OpenAI API key.
+3. Copy `example.config.yaml` to `config.yaml` for AI service configuration.
+4. Start all services: `docker compose up --build -d`.
+5. Stop all services: `docker compose down`.
 
 ### Optional
 
@@ -36,7 +37,7 @@ Path structure as following:
 ## How to start with custom LLM
 
 To start with a custom LLM, the process is similar to starting with OpenAI. The main difference is that you need to modify the `config.yaml` file
-that we created on the previous step. After modifying the file, you can restart the services by running `docker-compose --env-file .env up -d --force-recreate wren-ai-service`.
+that we created on the previous step. After modifying the file, you can restart the services by running `docker compose up -d --force-recreate wren-ai-service`.
 
 For detailed information on how to modify the configuration for different LLM providers and models, please refer to the [AI Service Configuration](../wren-ai-service/docs/configuration.md).
 This guide provides comprehensive instructions on setting up various LLM providers, embedders, and other components of the AI service.

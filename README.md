@@ -69,6 +69,97 @@ Using Wren AI is super simple, you can set it up within 3 minutes, and start to 
 - Visit the [Usage Guides](https://docs.getwren.ai/oss/guide/connect/overview?utm_source=github&utm_medium=content&utm_campaign=readme) to learn more about how to use Wren AI.
 - Or just start with [Wren AI Cloud](https://getwren.ai/?utm_source=github&utm_medium=content&utm_campaign=readme) our Managed Cloud Service. ([OSS vs. Commercial Plans](https://docs.getwren.ai/oss/overview/cloud_vs_self_host)).
 
+## 🐳 Quick Start with Docker
+
+The fastest way to get Wren AI up and running is using Docker Compose. Follow these simple steps:
+
+### Prerequisites
+
+- Docker and Docker Compose installed
+- OpenAI API key (or another supported LLM provider)
+
+### Setup Steps
+
+1. **Navigate to the docker directory:**
+   ```bash
+   cd docker
+   ```
+
+2. **Copy example files to create your working configuration:**
+   ```bash
+   # Copy docker-compose.yaml (this file is gitignored)
+   cp example.docker-compose.yaml docker-compose.yaml
+   
+   # Copy environment variables file
+   cp example.env .env
+   
+   # Copy AI service configuration
+   cp example.config.yaml config.yaml
+   ```
+
+3. **Configure your environment:**
+   
+   Edit the `.env` file and set your required variables:
+   - `OPENAI_API_KEY` - Your OpenAI API key (required)
+   - `GEMINI_API_KEY` - Your Gemini API key (optional, if using Gemini)
+   - `USER_UUID` - A UUID v4 for user identification
+   - `POSTHOG_API_KEY` - PostHog API key (optional, for telemetry)
+   - `POSTHOG_HOST` - PostHog host URL (optional, for telemetry)
+   
+   You can also adjust version numbers and port settings as needed.
+
+4. **Configure your LLM provider:**
+   
+   Edit `config.yaml` to configure your LLM provider. See [configuration examples](https://github.com/Canner/WrenAI/tree/main/wren-ai-service/docs/config_examples) for different providers.
+
+5. **Start all services:**
+   ```bash
+   docker compose up --build
+   ```
+   
+   Or run in the background:
+   ```bash
+   docker compose up --build -d
+   ```
+
+6. **Access the application:**
+   
+   Open your browser and navigate to `http://localhost:3000` (or the port specified in `HOST_PORT` in your `.env` file).
+
+### Stop Services
+
+To stop all services:
+```bash
+docker compose down
+```
+
+### Services Included
+
+- **wren-ui**: Web UI (port 3000 by default)
+- **wren-ai-service**: AI service for query generation
+- **wren-engine**: SQL execution engine
+- **ibis-server**: Ibis server for data processing
+- **qdrant**: Vector database for embeddings
+- **bootstrap**: Initialization service
+
+### Custom LLM Configuration
+
+To use a custom LLM provider, modify the `config.yaml` file and restart the AI service:
+
+```bash
+docker compose up -d --force-recreate wren-ai-service
+```
+
+For detailed LLM configuration options, see the [AI Service Configuration documentation](../wren-ai-service/docs/configuration.md).
+
+### Troubleshooting
+
+- **Port conflicts**: If port 3000 is already in use, modify `HOST_PORT` in your `.env` file
+- **Build issues**: Make sure Docker has enough memory allocated (recommended: 8GB+)
+- **Service not starting**: Check logs with `docker compose logs [service-name]`
+
+For more detailed setup instructions, see the [wren-ui README](./wren-ui/README.md) or the [docker README](./docker/README.md).
+
 ## 🏗️ Architecture
 
 <p align="center">
